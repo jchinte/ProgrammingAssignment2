@@ -25,26 +25,32 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## cachsolve(x) - x is a custom matrix object. Returns the inverse of matrix x, either by calling solve() 
+## or by referencing the cached solution
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  ## Return a matrix that is the inverse of 'x'
   i <- x$getinverse()
+  
   if (!is.null(i)){
     message("getting cached data")
     return(i)
   }
   
+  #Solve the matrix because the cache is empty
   data <- x$get()
   i <- solve(data, ...)
   x$setinverse(i)
   i
 }
 
-## Create a random uniform square n * n matrix
 
-randommatrix <- function(n) {
-    m <- matrix(runif(n*n), ncol=n)
+##Utility Function for Testing
+## Create a random uniform i * j matrix
+
+randommatrix <- function(i, j=i) {
+    mat <- matrix(runif(i*j), ncol=j)
     
-    m
+    mat
 }
+
